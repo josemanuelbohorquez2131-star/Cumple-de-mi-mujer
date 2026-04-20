@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Para mi Mujer 🩷</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #ff9bb3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    color: white;
+    overflow: hidden;
+}
+
+/* INICIO */
+#inicio {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: #ff9bb3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    z-index: 10;
+}
+
+#inicio button {
+    padding: 15px 25px;
+    font-size: 18px;
+    border: none;
+    border-radius: 15px;
+    background: white;
+    color: #ff4d88;
+    cursor: pointer;
+}
+
+/* CONTENIDO */
+.card {
+    text-align: center;
+}
+
+#contador {
+    font-size: 24px;
+    margin: 20px 0;
+}
+
+/* GALERIA */
+.galeria {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+.galeria img {
+    width: 110px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 15px;
+}
+
+/* CARTA */
+.carta {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, 200%) scale(0.8);
+    width: 90%;
+    max-width: 600px;
+    height: 500px;
+    z-index: 5;
+    transition: 1.2s ease;
+}
+
+.carta.activa {
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.tapa {
+    background: #ff4d88;
+    height: 100%;
+    border-radius: 15px;
+    position: absolute;
+    width: 100%;
+    transform-origin: top;
+    transition: 1s;
+}
+
+.carta.activa .tapa {
+    transform: rotateX(-180deg);
+}
+
+.contenido-carta {
+    height: 100%;
+    overflow-y: auto;
+    background: white;
+    color: black;
+    border-radius: 15px;
+    padding: 20px;
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+/* OVERLAY */
+.overlay {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0);
+    top: 0;
+    left: 0;
+    transition: 1s;
+    z-index: 3;
+}
+
+.overlay.activo {
+    background: rgba(0,0,0,0.6);
+}
+
+/* ANIMACIONES */
+.subir {
+    transform: translateY(-200px);
+    transition: 1.2s ease;
+}
+
+.mover-izq {
+    transform: translateX(-200%);
+    transition: 1.2s ease;
+}
+
+.mover-der {
+    transform: translateX(200%);
+    transition: 1.2s ease;
+}
+
+/* CORAZONES */
+.corazon {
+    position: absolute;
+    animation: flotar 6s linear infinite;
+}
+
+@keyframes flotar {
+    0% {transform: translateY(100vh); opacity:1;}
+    100% {transform: translateY(-10vh); opacity:0;}
+}
+</style>
+
+</head>
+
+<body>
+
+<!-- INICIO -->
+<div id="inicio">
+    <h1>🩷 Para mi Niña linda 🩷</h1>
+    <button onclick="entrar()">Entrar</button>
+</div>
+
+<!-- CONTENIDO -->
+<div class="card" id="contenido" style="display:none;">
+
+<h2>Días para que mi reina cumpla años 🩷</h2>
+
+<h3 id="contador"></h3>
+
+<div class="galeria" id="galeria">
+    <img src="foto1.jpg">
+    <img src="foto2.jpg">
+    <img src="foto3.jpg">
+</div>
+
+</div>
+
+<!-- CARTA -->
+<div class="carta" id="carta">
+    <div class="tapa"></div>
+    <div class="contenido-carta">
+        <p>
+       Bueno mi niña, primero que todo quiero agradecerte por todo lo que hemos vivido, lo bueno y lo malo por igual.<br><br>
+
+Porque cada momento contigo, incluso los difíciles, han hecho que lo nuestro sea más fuerte y más real.<br><br>
+
+Desde que llegaste a mi vida, todo cambió y mucho aunque no creas, me haces sentir cosas que nunca había sentido, me haces feliz de una forma que no sabía que se podía, y cada día contigo se vuelve especial.<br><br>
+
+Gracias por tu paciencia, por tu forma de ser, por tu cariño y por cada detalle que tienes conmigo.<br><br>
+
+Eres una persona increíble, y de verdad que te mereces todo lo mejor y me siento muy afortunado de tenerte en mi vida.<br><br>
+
+Hoy en tu cumpleaños quiero recordarte lo importante que eres para mí, lo mucho que te valoro y todo lo que significas en mi vida.<br><br>
+
+Eres mi alegría, mi tranquilidad, mi lugar seguro y mi razón para seguir adelante y más si es contigo.<br><br>
+
+Y aunque a veces no lo diga todo o no te dé lo mejor de mí, quiero que sepas que te amo muchísimo y que quiero seguir viviendo muchos momentos más contigo.<br><br>
+
+Feliz cumpleaños mi amor, espero que este día sea tan especial como tú lo eres para mí 🩷🩷👑
+        </p>
+    </div>
+</div>
+
+<div class="overlay" id="overlay"></div>
+
+<!-- MUSICA -->
+<audio id="musica" loop>
+  <source src="cancion.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+function entrar() {
+    document.getElementById("inicio").style.display = "none";
+    document.getElementById("contenido").style.display = "block";
+    document.getElementById("musica").play();
+}
+
+// CONTADOR
+function actualizarContador() {
+    const fechaObjetivo = new Date("April 28, 2026 00:00:00").getTime();
+    const ahora = new Date().getTime();
+    const diferencia = fechaObjetivo - ahora;
+
+    if (diferencia <= 0) {
+        const contador = document.getElementById("contador");
+        const galeria = document.getElementById("galeria");
+        const carta = document.getElementById("carta");
+        const overlay = document.getElementById("overlay");
+
+        contador.innerHTML = "🎉 Hoy es tu día!! 🩷";
+
+        contador.classList.add("subir");
+
+        const imgs = galeria.querySelectorAll("img");
+        imgs[0].classList.add("mover-izq");
+        imgs[2].classList.add("mover-der");
+
+        setTimeout(() => {
+            overlay.classList.add("activo");
+        }, 400);
+
+        setTimeout(() => {
+            carta.classList.add("activa");
+        }, 900);
+
+        setInterval(crearCorazon, 250);
+
+        return;
+    }
+
+    const dias = Math.floor(diferencia / (1000 * 60 * 60 * 24));
+    const horas = Math.floor((diferencia % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutos = Math.floor((diferencia % (1000 * 60 * 60)) / (1000 * 60));
+    const segundos = Math.floor((diferencia % (1000 * 60)) / 1000);
+
+    document.getElementById("contador").innerHTML =
+        `${dias}d ${horas}h ${minutos}m ${segundos}s ⏳`;
+}
+
+setInterval(actualizarContador, 1000);
+
+// CORAZONES
+function crearCorazon() {
+    const corazon = document.createElement("div");
+    corazon.classList.add("corazon");
+
+    const corazones = ["🩷","💗","💖","💞","💓"];
+    corazon.innerHTML = corazones[Math.floor(Math.random() * corazones.length)];
+
+    corazon.style.left = Math.random() * 100 + "vw";
+    corazon.style.fontSize = Math.random() * 20 + 15 + "px";
+
+    document.body.appendChild(corazon);
+
+    setTimeout(() => {
+        corazon.remove();
+    }, 6000);
+}
+</script>
+
+</body>
+</html>
